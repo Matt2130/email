@@ -4,18 +4,19 @@ import transporter from '../config/emailConfig.js';
 
 dotenv.config();
 
-const RABBITMQ_URL = "amqp://admin:admin@localhost";
+const RABBITMQ_URL = "amqps://swaoxvxj:I3ebhgz2vpi0rsUGFeKSCGu-ZUy4zsof@hawk.rmq.cloudamqp.com/swaoxvxj";
 
 export async function userEvents() {
+    const connection = await amqp.connect(RABBITMQ_URL);
     try {
-        const connection = await amqp.connect({
+/*         const connection = await amqp.connect({
             protocol: 'amqp',
             hostname: process.env.RABBIT_HOST || 'rabbitmq',
             port: 5672,
             username: process.env.RABBITMQ_USER || 'user',
             password: process.env.RABBIT_PASS || 'password'
         });
-        
+         */
         const channel = await connection.createChannel();
 
         const exchange = 'user_event';
